@@ -1,0 +1,309 @@
+
+Muda o diretório
+
+	cd ~	
+
+Diretório anterior ao atual
+	
+	cd -
+
+Diretório home
+
+	cd ~
+
+volta dois diretórios
+
+	cd ../..	
+
+Mostra o conteúdo de um diretório
+
+	ls ~
+
+Mostra arquivos ocultos
+
+	ls -a
+
+Mostra uma lista de arquivos com seus detalhes
+
+	ls -l	
+
+Mostra uma lista de arquivos com seus detalhes com o tamanho do arquivo em kbytes
+
+	ls -lh ~		
+ 
+Mostra todos os arquivos que começam com Aula1+ qualquer caractere + 0 
+
+	ls Aula1*0
+
+Mostra todos os arquivos que começam com Aula + 1, 2 ou tres 
+
+	ls Aula[1,2,3]*
+
+Mostra todos os arquivos que começam com Aula e não tenham 1, 2 ou tres 
+
+	ls Aula[!1,2,3]*	
+
+Mostra todos os arquivos que começam com Aula + 1, 2, 3, 4 ou 5 (range)
+
+	ls Aula[1-5]*
+
+Mostra todos os arquivos que começam com Aula e não tenham 1, 2, 3, 4 ou 5 (range)
+
+	ls Aula[!1-5]*
+
+Mostra todos os arquivos que começam com Aula e tenha 10,20 ou 30
+
+	 ls Aula[1-3][0]
+	 ls Aula{10,20,30}
+
+
+Mostra todos os arquivos que começam com A + ula ou ULA e tenha 10,20 ou 30
+
+	ls -l A{ula,ULA}{10,20,30}	
+	
+mostra o que é o arquivo 
+
+	file alunos.txt
+
+copia os arquivos que começam com alunos para o diretório tmp, a opção -v (verbose) mostra os detalhes do que ocorreu
+
+	cp -v alunos* teste/
+
+pergunta se você deseja sobrescrever um arquivo
+
+	cp -i alunos* teste/
+
+comando cp não copia diretórios por padrão, é necessário informar a opção -r para que seja possível copiar o diretório1 para o /t/
+
+	cp -r t teste/
+
+Copia o arquivo preservando as suas características, como o usuário que criou o arquivo a data e hora.
+
+	cp -p Scripts* /teste
+	
+copia o arquivo pro mesmo diretório
+
+	cp alunos.txt teste
+
+Copia o arquivo para o diretório tmp e muda seu nome 
+
+	cp alunos.txt teste/alunos1234.txt
+
+Move os arquivos 
+
+	mv alunos.txt teste/
+
+Cria um arquivo em branco 
+
+	touch	
+
+Atualiza o arquivo o horário de um arquivo existente. 
+
+	touch arquivo.txt
+
+Altera a data do último acesso 
+
+	 touch -a alunos.txt	
+
+Altera a data e hora da última modificação
+
+	touch -m arquivolongo.txt
+
+Altera a data e hora que você deseja
+
+	
+
+Remove arquivo de diretórios 
+
+	rm
+
+Pergunta se você deseja realmente excluir o arquivo
+
+	rm -i
+
+Mostra os detalhes da remoção
+
+	rm -v t/
+
+Remove o diretório e o que tem dentro dele
+
+	rm -r t/	
+
+Usado para remover diretórios vazios
+
+	rmdir t/ 
+
+Remove o diretório e tudo que tem dentro
+
+	rm -r
+
+Cria um diretório 
+
+	mkdir
+
+Cria um diretório Linux, e o diretório dentro dele
+
+	mkdir -r 
+
+Cria toda a estrutura de pastas 
+
+	mkdir -p t/t	
+
+usado para procurar arquivos e diretórios
+
+	find	
+	
+Este comando irá procurar no /home um arquivo que possua o nome Aula10
+
+	find /home -name Aula10
+
+Este comando vai procurar a partir do diretório atual (./), qualquer arquivo que tenha sido alterado no máximo um dia antes
+
+	find / -ctime -1
+
+criar um arquivo com vários arquivos agrupados, c de criar,  p preserva as opções, v ver os detalhes, f pra mostrar o nome do arquivo
+	
+	tar -cpvf backup.tar * 
+
+Mostra os arquivos que estão dentro do arquivo agrupado
+
+	tar -tf backup.tar
+
+Compacta arquivo
+
+	gzip backup.tar	
+
+descompacta arquivo
+	
+	unzip backup.tar.gz	
+
+descompacta arquivo
+
+	gunzip backup.tar.gz	
+
+descompacta arquivo
+
+	gzip -d backup.tar.gz 
+
+Mantendo o arquivo de origem 
+
+	gzip -k backup.tar
+
+Mantendo o arquivo de origem 
+
+	bzip2 -k backup.tar
+
+descompacta arquivo
+
+	bzip2 -d backup.tar	
+
+descompacta arquivo
+
+	bunzip2 -d backup.tar.bz2
+
+Mantendo o arquivo de origem 
+
+	bunzip2 -k backup.tar.bz2
+
+descompacta arquivo
+
+	xz -k backup.tar
+
+descompacta arquivo
+
+	unxz backup.tar.xz 
+
+agrupa e compacta 
+
+	tar cpvf backup2.tar * 
+
+agrupa e compacta com o gzip
+
+	tar zcpvf backup2.tgz *
+	
+agrupa e compacta com o bzip2
+
+	tar jcpvf backup.tbz *
+
+agrupa e compacta com o xz
+
+	tar Jcpvf backup.txz *
+	
+Mostra como foi feito o backup dos arquivos 
+
+	file backup*
+
+se o .tgz foi compactado com o z no final, então use o z para descompactar, x para extrair  , 
+v para os detalhes (verbose), f para indicar o nome do arquivo  
+
+	tar zxvf backup2.tgz
+
+se o .txz foi compactado com o xz, então use o J para descompactar, x para extrair  , v para os detalhes (verbose), f para indicar o nome do arquivo  (sempre a última opção do arquivo)
+
+	tar Jxvf backup.txz 
+
+criar um arquivo com vários arquivos agrupados, porém precisa de uma lista de entrada 
+
+	cpio 
+
+Procura no diretŕio atual por nome todos os arquivos que comecem com novo
+
+	find ./ -name "novo*"
+
+Cria uma lista de arquivo e passa isso como entrada para o cpio 
+
+	find ./ -name "novo*" |cpio -o > backup.cpio
+
+Cria uma lista de arquivo e passa isso como entrada para o cpio (-o cria o arquivo)  que agrupa, e é compactado pelo gzip
+
+	find ./ -name "novo*" |cpio -o |gzip > backup.cpio.gz
+
+desagrupar backup.cpio 
+
+	cpio -i < backup.cpio
+
+descompacta backup.cpio
+
+	gunzip -c backup.cpio.gz | cpio -i
+ 
+Usado para compactar um partição inteira
+
+	dd
+ 
+Cria um arquivo de imagem
+
+	sudo dd if=/dev/sdb4 of=imagem.img
+
+
+
+6. No home de seu usuário, crie um diretório chamado LPI1, dentro dele crie Aulas, Exercicios e Exemplos.
+
+	cd ~/teste ; mkdir -p LPI1/Aulas ;mkdir -p LPI1/Exercicios ;mkdir -p LPI1/Exemplos  
+
+
+7. Copie (não mova) todos os arquivos e diretórios existentes em /etc/network/ para <HOME>/LPI1/Exercicios/Network/. Mantenha as mesmas permissões.
+
+	cp -p /etc/network/* ~/teste/LPI1/Exercicios/Network/
+
+8. Copie (não mova) todos os arquivos do diretório /etc, cujo norme termine com ".conf" para <HOME>/LPI1/Exercicios/Config/ 
+
+	cp /etc/*.conf /home/lpi1/teste/LPI1/Exercicios/Config
+		
+
+9. Em <HOME>/LPI1/Exercicios, crie um arquivo chamado arquivos-cron.tgz, compactado com o gzip, contendo todos os arquivos e diretórios do /etc que contenham a palavra "cron" no nome.
+
+	tar zcpvf arquivo-cron.tgz /etc/*cron*
+
+10. Descompacte conteúdo do arquivo arquivos-cron.tgz dentro do diretório <HOME>/LPI1/Exercicios/Descompactar/
+
+	cd ~/LPI1/Exercicios/Descompactar/; tar zxvf ../arquivo-cron.tgz
+	
+
+11. Encontre todos os arquivos do diretório /var, cujo nome termine com ".gz" e que foram modificados nas últimas 48 horas.
+
+	find /var -name "*.gz" -atime -2
+
+
+
+
+

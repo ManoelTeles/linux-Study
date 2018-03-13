@@ -1,0 +1,164 @@
+Mostra as informações do IRQ no linux
+
+	cat /proc/interrupts
+
+Mostra as informações de I/O no linux
+
+	cat /proc/ioports
+
+Mostra as informações do DMA no linux
+
+	cat /proc/dma
+
+Quais os Dispositivos conectados ao barramento PCI
+
+	lspci
+
+Mostra os detalhes do dispositivo 00:01.1
+
+	lspci -s 00:02.0 -v
+
+Quais os Dispositivos conectados ao barramento USB
+
+	lsusb
+
+Mostra os detalhes do dispositivo 001:001 
+
+	 lsusb -s 002:018 -v
+
+Mostra as partições do sistema 
+
+	df
+
+Mostra todas as partições, incluindo as virtuais 
+
+	df -a
+
+Mostra os dados da CPU
+
+	cat /proc/cpuinfo
+
+Mostra os dados da Memória 
+
+	cat /proc/meminfo
+
+Mostra os file systems de SWAP
+
+	cat /proc/swaps	
+
+Mostra os dispositivos identificados como SCSI 
+
+	cat /proc/scsi/scsi 
+
+Mostra os discos que estão sendo utilizados pelo sistema.
+
+	fdisk -l
+
+log que é gerado a cada vez que a máquina é “bootada” 
+
+	dmesg |less
+
+Mostra todos os módulos que estão sendo utilizados
+
+	ls -l /lib/modules
+
+Mostra a versão do Kernel
+
+	uname -r
+
+Pode definir quais módulos você deseja que seja carregado no sistema.
+
+	cat /etc/modules
+
+Mostra os módulos carregados no sistema
+
+	lsmod
+
+Possui as informações dos módulos 
+
+	cat /proc/modules
+
+Mostra detalhes de um módulo
+
+	modinfo video 
+
+Retira um módulo da lista de módulos carregados, neste caso está retirando o mouse
+
+	rmmode
+
+Insere um módulo na lista de módulos carregados , neste caso está inserindo o mouse (não carrega as dependências) 
+
+	insmode 
+
+Insere e carrega módulos, mapeia as dependências dos módulos e identifica o caminho completo através do nome 
+
+	modprobe
+
+Insere o módulo de bluetooth
+
+	modprobe bluecard_cs
+
+Retira o módulo de bluetooth
+
+	modprobe -r bluecard_cs
+
+
+----------------------------------------------------------------------------------------------
+
+101.1 Identificar e Configurar o Hardware
+
+----------------------------------------------------------------------------------------------
+
+1. Verifique as seguintes informações referentes aos dispositivos de hardware de sua máquina:
+
+Nome do dispositivo de áudio/multimedia que está sendo utilizado
+
+	lspci |grep audio
+
+O IRQ utilizado pelo dispositivo de áudio/multimedia
+
+	lspci -s 00:05.0 -v
+	cat /proc/interrupts		
+
+Quantidade de devices conectados em seu barramento USB
+
+	lsusb
+
+Nome do modelo da(s) CPU(s) utilizadas
+
+	cat /proc/cpuinfo
+
+Como o dispositivo de armazenamento foi mapeado em seu Linux (sda, sdb, hda, hdb)
+
+	 df -l
+
+2. Quais as dependências do módulo "snd"
+
+	modinfo snd
+
+3. Carregue o módulo batman-adv em seu sistema Linux, verifique se o mesmo foi corretamente carregado e em seguida descarregue-o.
+
+	----------modprobe------------	
+	sudo modprobe batman-adv
+	lsmod 
+	sudo modprobe -r batman-adv
+	lsmod 
+
+	----------insmod, rmmod-------
+	sudo insmod /lib/modules/4.8.0-46-generic/kernel/net/batman-adv/batman-adv.ko 
+	lsmod
+	rmmod batman-adv 	
+	lsmod	
+
+4. Quais as vantagens do uso do modprobe no lugar do insmod e rmmod?
+
+	O modprobe possui o mapeamento de todos os nomes dos módulos, seu arquivo .ko e
+	suas dependências, com isso ele consegue subir ou baixar um módulo apenas por sue
+	nome, não sendo necessário a indicação do caminho completo. Consegue também
+	subir e baixar um módulo e suas dependências. 
+
+
+
+
+
+

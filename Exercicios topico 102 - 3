@@ -1,0 +1,133 @@
+----------------------------------------------------------------------------------------------
+
+SystemV (SysV) - RUNLEVELS
+
+----------------------------------------------------------------------------------------------
+
+Arquivo de configuração inittab
+
+	/etc/inittab |less
+
+Vários arquivos referentes aos serviços
+	
+	cd /etc/init.d && ls
+
+Irá mostrar o status do serviço de agendamento de tarefas no linux
+
+	./cron status
+
+Mostra os runlevels 
+
+	cd /etc && ls -ld rc*
+
+Usado para mostrar o runlevel que você está usando 
+
+	runlevel
+
+Muda o runlevel
+
+	init 1
+
+muda o runlevel 
+
+	telinit 1
+
+muda o runlevel para 6, reinicia a máquina
+
+	init 6	
+
+----------------------------------------------------------------------------------------------
+
+SYSTEMD
+
+----------------------------------------------------------------------------------------------
+
+Arquivos de configurações das unidades
+
+	cd /lib/systemd/system && ls -l
+
+Arquivos de configurações das unidades, apenas os arquivos que terminam com target
+
+	cd /lib/systemd/system && ls -ld *target
+
+Arquivos de configurações das unidades, apenas os arquivos que terminam com service
+
+	cd /lib/systemd/system && ls -ld *service
+
+Mostra o que ele deve executar 
+
+	cat cron.service
+
+Contém alguns arquivos de configuração do systemd
+
+	cd /etc/systemd/system && ls -ltr
+
+Mostra os init em execução
+
+	ps axu |grep init
+
+Mostra o local onde o init esta sendo apontado 
+
+	ls -l /sbin/init
+
+System manager control commands 
+
+	systemctl
+
+Listas todas as unidades
+
+	systemctl list-units
+
+Reinicializa o sistema 
+
+	systemctl reboot
+
+Desliga a máquina
+
+	systemctl poweroff
+
+Defini o target default
+
+	systemctl set-default multi-user.target
+
+Muda o nível de execução 
+
+	systemctl isolate rescue.target 
+
+Inicia o target default (normalmente o graphical) 
+
+	systemctl default
+
+Mostra o estado deste serviço
+
+	systemctl status cron.service
+
+Inicia o Serviço
+
+	systemctl start cron.service
+
+Desliga a máquina a um minuto (padrão)
+Cancela o comando 
+Reinicia o Sistema
+Desliga o Linux, porém não desliga a máquina 
+Agenda o restart para daqui a 10 minutos 
+Programa o desligamento para as 18:00
+Reinicia a máquina
+Desliga o Linux, porém não desliga a máquina 
+Desliga a máquina
+Manda uma mensagem para todos os usuários do sistema 
+
+
+
+
+101.3 Alterar os RunLevels, Shutdown e Reboot
+
+6. Identifique se a sua instalação Linux está utilizando SysV, systemd ou upstart.
+
+7. Identifique o runlevel ou target padrão em seu sistema de inicialização SysV ou systemd.
+
+8. Em um sistema systemd, identifique a quantidade de targets existentes.
+
+9. Em um sistema com systemd, verifique se o serviço cron está sendo iniciado por padrão no target default. Se não estiver, faça com que seja, se estiver, desabilite.
+
+10. Informe pelo menos 3 comandos diferentes para reiniciar uma máquina Linux.

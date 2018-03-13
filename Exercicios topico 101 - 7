@@ -1,0 +1,119 @@
+
+Mostra as linhas que contêm a palavra Linux.
+
+	grep Linux texto.txt
+
+Conta quantas ocorrências desse texto ele achou no arquivo.
+
+	grep -c Linux texto.txt
+
+Conta quantas ocorrências desse texto ele achou em todos os arquivos do diretório atual.
+
+	grep -c Linux *
+
+Mostra as linhas que contêm a palavra Linux, ignorando o case sensitive. 
+
+	 grep -i Linux texto.txt 
+
+Procura as ocorrências desse texto recursivamente em todos os diretórios que comecem com a letra t.
+
+	grep -r linux t*
+
+Usado para expressões regulares mais avançadas e abrangentes 
+
+	egrep
+
+Todas as linhas do arquivo texto que não contém Linux
+
+	grep -v Linux texto.txt
+
+Todas as linhas do arquivo texto que não contém Linux, e ignora o case sensitive
+
+	grep -vi Linux texto.txt
+
+Mostra todas as ocorrências do arquivo texto que possuem b+ a ou e ou i + g
+
+	egrep “b[aei]g”
+
+Mostra todas as ocorrências do arquivo texto que possuem b+ de a até u + g
+
+	egrep "b[a-u]g" texto.txt
+
+Mostra todas as ocorrências do arquivo que tenham Linux no começo
+
+	egrep "^Linux" texto.txt
+	egrep -i "^linux" texto.txt
+
+Mostra todas as ocorrências do arquivo que tenham Linux no Final
+
+	egrep "Linux$" texto.txt
+
+Tudo o q é comentário
+
+	egrep "^#" texto.txt 
+
+Mostra tudo menos o comentário
+
+	egrep -v "^#" texto.txt 
+
+Procura algo que não tenha no começo e final da linha, ou seja ele procura as linhas em branco 
+
+	egrep "^$" texto.txt
+
+Mostra as linhas que não estão em branco
+
+	egrep -v "^$" texto.txt
+
+Mostra todas as palavras que possuem b + a ao i + g ou não 
+
+	egrep "b[a-i]." texto.txt
+
+Mostra todas as palavras que possuem b + a ao i + g ou não + a letra e
+
+	egrep "b[a-i].e" texto.txt
+
+Mostra todas as palavras que possuem b + a ao i + g, porém é preciso aparecer o caracter g pelo menos uma vez
+
+	egrep "b[a-i]g+" texto.txt	
+
+Mostra todas as palavras que possuem b + a ao i + g, porém é preciso aparecer o caracter g nenhuma ou uma vez.
+
+	egrep "b[a-i]g?" texto.txt	
+
+Mostra todas as palavras que possuem b + a ao i + g, porém é preciso aparecer o caracter g unicamente.
+
+	egrep "b[a-i].g" texto.txt
+
+Mostra todas as palavras que possuem b + a ao i + g, depois do último caractere pode ser qualquer caractere
+
+	egrep "b[a-i]g." texto.txt
+
+Mostra qualquer texto que tem obrigatoriamente O (.) e qualquer coisa entre o O e o Linux (*).
+
+	egrep  "O.Linux*" texto.txt	
+
+Substitui um valor pelo o outro
+
+	 sed "s/Linux/Dragão/" texto.txt
+
+Toda vez que encontrar a palavra linux sera deletado
+
+	sed "/[L,l]inux/d" texto.txt
+
+Toda vez que encontrar o # no começo da linha irá apagar 
+
+	sed "/^#/d" texto.txt
+
+Toda vez que encontrar Linux ou linux no começo da linha irá apagar 
+
+	sed "/^[L,l]inux/d" texto.txt
+
+Irá substituir toda palavra Linux ou linux por Windows
+
+	sed "s/[L,l]inux/ Windows/" texto.txt
+
+Irá exibir todos caracteres linux. , dessa maneira ignorando o ponto como caractere especial
+
+	egrep -i “linux\.” texto.txt
+
+

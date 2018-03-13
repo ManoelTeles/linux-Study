@@ -1,0 +1,7 @@
+Ver as informações do BOOT, além de informações dinâmicas 
+
+101.2 O Processo de Boot
+
+5. Identifique através do comando dmesg o nome do arquivo kernel carregado durante o boot.
+
+dmesg |grep BOOT_IMAGE

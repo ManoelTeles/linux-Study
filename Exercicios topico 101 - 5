@@ -1,0 +1,240 @@
+
+Reporta todos os processos em execução, mostra os processos em execução do usuário
+
+	ps	
+
+mostra modo de exibição de usuário, colunas USER, PID, %CPU, %MEM, RSS, TTY, STAT, START, TIME, COMMAND
+
+	ps -u
+
+Mostra processos que não foram iniciados pelo pts/7
+
+	ps -ux |grep -v "pts/7" |less	
+
+Mostra os processos de todos os usuários
+
+	ps -aux
+
+Mostra em formato de árvore
+
+	ps -auxf
+
+Mostra outras informações
+
+	ps -lxaf | less
+
+Mostra todos os processos que tenham a palavra photo
+
+	 ps -aux |grep photo
+
+Mostra todos os processos que tenham a palavra init
+
+	 ps -aux |grep init
+
+Mostrar as informações no modo usuário e os comandos que possuem VBoxClient 
+
+	ps u -C VBoxClient
+
+Mostra os processos em formato de uma árvore
+
+	pstree
+
+Mostra os processos em formato de uma árvore, e mostra o id do processoq
+
+	pstree -p
+
+Mostra o ids do processo 
+
+	pgrep bash
+
+Mostra o id do processo do usuário root 
+
+	pgrep bash -u root
+
+Mostra todos os processos da máquina
+
+	top	
+
+Ordena pelos os processos que consomem mais memória
+
+	top shift + n
+	
+Ordena pelos os processos por uso cpu
+
+	top shift + c
+
+Mudar prioridade de execução
+
+	top shift + r	
+
+Mostra apenas 20 processos
+	
+	shift + n + 20
+
+Mostra todas as opções
+
+	top ? ou h
+
+sai do top
+	
+	q
+
+Joga a saída pra tela, não será mais dinâmico 
+
+	top -b
+
+Atualiza a cada três segundos 
+
+	top -b -d3
+
+Joga as informações do processo para o processos-linux.out
+
+	top -b -d3 -n3 > arquivo.out
+
+Comando usado para mandar sinais a um processo 
+
+	kill
+
+mostra os tipos de sinais que podem ser enviados a um processo 
+
+	kill -l
+
+Este comando acha o PID do firefox 
+
+	ps -axu |grep firefox
+
+Mostra o PID do firefox
+
+	pgrep firefox
+
+mata o processo de forma soft 
+
+	kill 12750
+
+Finaliza o processo de maneira imediata
+
+	kill -s sigkill 12921
+
+
+Finaliza o processo de maneira imediata
+
+	 kill -s 9 12494
+
+Mata todos os processos que possuem o nome firefox 
+
+	killall firefox 
+
+Mata todos os processos que possuem de internet 
+
+	killall httpd  
+
+Mata o processo do firefox 
+
+	pkill firefox 
+
+Mata o processo do firefox  que foram iniciados pelo usuário lpi1
+
+	 pkill -1 firefox -u lpi1 
+
+Quanto tempo a máquina está ativa 
+
+	uptime
+
+Mostra a quantidade de memória e swap utilizada pelo sistema
+
+	free
+
+Mostra em mega
+
+	free -m	
+
+Mostra em giga 
+
+	free -g
+
+Screen  is  a full-screen window manager that multiplexes a physical terminal between several processes 
+desassociado ao terminal 
+Preso ao terminal
+
+	screen
+
+Inicia o firefox em foreground
+
+	firefox
+
+Inicia o firefox em background
+
+	firefox &
+
+mostra os jobs que estão rodando em background
+
+	jobs
+
+mostra os jobs que estão rodando em background, mostra também os PID’s 
+
+	jobs -l
+
+coloca o último processo que foi trabalhado em background
+
+	bg
+
+coloca o último processo que foi trabalhado em foreground
+
+	fg
+
+Indica o processo que você deseja colocar em background 
+
+	bg 2
+
+Roda um comando imune a hangups
+
+	nohup
+
+coloca o firefox em background, igora as entradas e jogando as saídas no arquivo nohup.out 
+
+	nohup firefox &
+
+----------------------------------------------------------------------------------------------
+
+103.5 Criar, Monitorar e Encerrar Processos
+
+----------------------------------------------------------------------------------------------
+
+5. Preencha as informações abaixo com os dados de sua instância Linux:
+
+Total de Memória RAM utilizada (em MB):
+
+	free -m
+
+Load Average (Média dos Últimos 5 minutos): 
+	
+	top
+	uptime
+
+Quantidade de Processos em Execução: 
+
+	ps -axu |wc -l
+
+PID dos 3 processos que estão utilizando mais Memória:
+
+	top + shift + m
+	
+
+PPID (Parent Process ID) dos 3 processos com maior tempo de Uso de CPU: 
+
+	top + T 
+	f 
+	escolher ppid
+
+
+16. Crie um comando, que gere um arquivo chamado ~/LPI1/Exercicios/resultado-top.out, que contenha a saída do comando top, atualizado a cada 10 segundos, sendo executado indefinidamente até que o processo seja morto. O comando deve rodar em background.
+
+	top -b -d10 > ~/LPI1/Exercicios/resultado-top.out &
+
+17. Envie um sinal de SIGKILL para o processo iniciado no exercício 16.
+
+	kill -s 9 13931
+
+
+
+

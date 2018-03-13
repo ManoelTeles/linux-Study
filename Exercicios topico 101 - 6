@@ -1,0 +1,60 @@
+
+Definir o nice de um comando (-20(maior prioridade)….+19(menor prioridade), o padrão do nice sem nenhum argumento é 10
+
+	nice
+
+Alterar o nice de um programa em execução (apenas o root pode definir prioridades maiores (-)
+
+	renice
+
+Inicia o firefox em background com prioridade 15 
+
+	nice -n 15 firefox & 
+
+Inicia o firefox em background com prioridade 15 
+
+	nice -15 firefox & 
+
+Inicia a calculadora em background com prioridade -15 (alta prioridade) 
+
+	nice -n -15 gnome-calculator &
+
+Inicia a calculadora em background com prioridade -15 (alta prioridade)
+
+	nice --15 gnome-calculator &	
+
+Redefine a prioridade do processo para o 8
+
+	renice 8 gnome-calculator 
+
+Redefine a prioridade do processo para o -7
+
+	renice -7 gnome-calculator 
+
+Redefine a prioridade do processo para o 7
+
+	renice 7 gnome-calculator 
+
+Irá alterar todos os processos do usuário lpi1 para a prioridade 5
+
+	renice -u lpi1 -n 5
+
+
+----------------------------------------------------------------------------------------------
+
+103.6 Modificar a Prioridade de Execução de Processos
+
+----------------------------------------------------------------------------------------------
+
+18. Inicie o mesmo comando aplicado no exercício 16, porém com a menor prioridade possível.
+
+	nice -19 top -b -d10 > ~/LPI1/Exercicios/resultado-top.out &
+
+19. Altere o NICE do processo "rsyslogd" para o valor -10.
+
+	renice -10 726
+
+
+
+
+

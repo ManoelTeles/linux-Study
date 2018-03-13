@@ -1,0 +1,136 @@
+Redirecionamento da saída padrão. Cria ou sobrescreve arquivo.  
+	
+	>
+
+Redirecionamento arquivo como entrada.  
+
+	<
+
+Redirecionamento de saída padrão. Cria ou adiciona ao final do arquivo.  
+
+	>>
+
+Redirecionamento de saída de erro. Cria ou sobrescreve arquivo.  
+
+	2>
+
+Redirecionamento do stdout e stderr para arquivo.
+
+	>arquivo 2>&1 
+
+A saida do comando ls será registrada no arquivo saida_ls.out
+
+	ls > saida_ls.out
+
+A saida do comando echo será registrada no arquivo saida_echo
+
+	echo "saida" > saida_echo
+
+Cria um novo arquivo ou substitui
+
+	> 
+	1>
+
+Cria uma nova linha no arquivo se ele existir ( append)
+
+	>>
+	1>>
+
+Joga o resultado de erro no arquivo saida_erro_ls
+
+	ls -l /tmp/arquivo_inex 2> saida_erro_ls
+
+Cria uma nova linha no arquivo se ele existir ( append)
+
+	ls -l >> new_archive 
+
+Redireciona o resultado do comando, caso o comando tenha sucesso o retorno é redirecionado para o arquivo saida-ls.out, caso ocorra um erro a saída é redirecionada para saida-ls-erro.out
+
+	ls -l /tmp/ > saida-ls.out 2> saida-ls-erro.out 
+
+Redireciona o resultado do comando, caso seja erro ou não, os dois irão para o mesmo arquivo.
+
+	ls -l arquivo* > saida-ls.out 2> &1
+
+Ordena e grava o resultado do comando no alunos-tmp, e depois salva por cima para deixar o arquivo ordenado.
+
+	alunos.txt > alunos-temp.txt
+	rm alunos.txt 
+	mv alunos-temp alunos.txt 
+
+Manda um email para um usuário. 
+
+	mail -s “Assunto” lpi1 
+
+pega o conteudo do arquivo alunos.txt, deixa apenas os campos únicos e por fim conta o número de linhas no arquivo
+
+	 cat alunos.txt |sort |wc -l
+
+Lista o conteúdo do diretório tmp, e grava isso no arquivo novo-arquivo-log ao mesmo tempo ele joga o resultado na tela
+
+	ls /tmp | tee novo-arquivo-log 
+
+Procura todos os arquivos que comecem com aula3 a partir do diretório home, e mostra o conteúdo do arquivo
+
+	 find /home -name “aula3*” | xargs ls -l 
+
+Retorna a versão do kernel 
+
+	uname -r
+
+a crase permite o shell executar primeiramente o uname e depois o comando echo 
+
+	 echo “A versão do kernel é: “ `uname -r` 
+
+o dólar parênteses permite o shell executar primeiramente o uname e depois o comando echo 
+
+	echo “A versão do kernel é: “ $(uname -r)
+
+
+
+103.4 Fluxos, Pipes e Redirecionamentos
+
+
+12. Gere um comando que crie um arquivo chamado diretorios-config.out, contendo a saída do "ls -l" para todos os diretórios do /var cujo nome contenha a palavra "config". A saída deve ser algo como o visto abaixo:
+
+drwxr-xr-x 2 root    root    4096 Mar 28 11:49 /var/cache/fontconfig 
+
+drwx------ 2 root    root    4096 Abr  7 11:37 /var/cache/ldconfig 
+
+drwxr-xr-x 2 lightdm lightdm 4096 Mar 27 16:41 /var/lib/lightdm/.cache/fontconfig 
+
+drwx------ 4 lightdm lightdm 4096 Mar 27 16:41 /var/lib/lightdm/.config
+
+
+	find /var -name "*config*"| xargs ls -ld > diretorios-config.out
+
+
+13. Explique as diferenças entre os seguintes redirecionadores de entradas e saídas
+
+> arquivo   :
+
+	redicionamento de saida padrao. Cria ou sobrescreve arquivo.  
+ 
+
+< arquivo   :
+
+	redicionamento de arquivo como entrada  
+
+>> arquivo :
+
+	redicionamento de arquivo padrão, adiona o conteudo no final do arquivo 	
+	
+2> arquivo :
+
+	Redirecionamento de saída de erro. Cria ou sobrescreve arquivo.  
+
+>arquivo 2>&1   :
+
+	Redirecionamento do stdout e stderr para arquivo. 		
+
+
+14. Escreva um único comando comando que gere a lista de arquivos e diretórios contidos em ~/LPI1/Exercicios/Network, exibindo-os na tela e em um novo arquivo chamado lista-network.out
+
+	ls -lR ~/LPI1/Exercicios/Network | tee lista-network.out
+
+

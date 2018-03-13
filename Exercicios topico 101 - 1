@@ -1,0 +1,62 @@
+------------------------------------------------------------------------------------------------------------------------
+
+103.1 Trabalhando na Linha de Comando
+
+------------------------------------------------------------------------------------------------------------------------
+
+1. Encontre as seguintes informações sobre a sua instalação Linux:
+
+O caminho completo do arquivo .bash_history para o seu usuário;
+	
+	set | grep .bash_history
+	echo $HISTFILE
+	
+O release do kernel instalado
+
+	uname -r
+
+Os diretórios incluídos em seu PATH
+
+	set |grep PATH
+	echo $PATH
+	
+O hostname da máquina
+	
+	echo $HOSTNAME
+	set |grep HOSTNAME
+
+O PID da sua sessão shell atual
+	echo $$
+
+
+2. Crie e exporte uma variável chamada "NOME" que contenha o seu nome completo.
+
+	export NOME="Manoel Weslley Teles de Sousa"
+	
+
+3. Crie um comando que escreva na tela a seguinte frase: "O Nome do Próximo Certificado LPI 1 é: <utilize a variável NOME>"
+		
+	echo "O Nome do Próximo Certificado LPI 1 é: $NOME"
+
+
+------------------------------------------------------------------------------------------------------------------------
+
+103.2 Aplicando Filtros a Textos e Arquivos
+
+------------------------------------------------------------------------------------------------------------------------
+
+4. O arquivo /etc/passwd contém a lista de usuários do Linux, os campos são separados pelo caractere :, o primeiro campo indica 
+	o nome do usuário e o terceiro o ID do usuário.
+
+	Escreva um comando que mostre os últimos 15 registros do arquivo, exibindo apenas o nome do usuário e seu ID, e 
+	que esteja ordenado pelo ID numérico. Por exemplo:
+
+	tail -n15 /etc/passwd |cut -d":" -f1,3 |sort -t":" -k2 -g
+
+
+5. Gere um comando, ou sequência deles, que mostre o número de linhas do arquivo /etc/passwd excluindo-se as linhas que contenham a palavra 		"daemon". O resultado do comando deve ser o número de linhas.
+
+	sed "/daemon/d" /etc/passwd |wc -l
+
+
+
