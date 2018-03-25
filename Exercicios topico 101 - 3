@@ -1,309 +1,166 @@
+----------------------------------------------------------------------------------------------
 
-Muda o diretório
+SystemV (SysV) - RUNLEVELS
 
-	cd ~	
+----------------------------------------------------------------------------------------------
 
-Diretório anterior ao atual
+Arquivo de configuração inittab
+
+	/etc/inittab |less
+
+Vários arquivos referentes aos serviços
 	
-	cd -
+	cd /etc/init.d && ls
 
-Diretório home
+Irá mostrar o status do serviço de agendamento de tarefas no linux
 
-	cd ~
+	./cron status
 
-volta dois diretórios
+Mostra os runlevels 
 
-	cd ../..	
+	cd /etc && ls -ld rc*
 
-Mostra o conteúdo de um diretório
+Usado para mostrar o runlevel que você está usando 
 
-	ls ~
+	runlevel
 
-Mostra arquivos ocultos
+Muda o runlevel
 
-	ls -a
+	init 1
 
-Mostra uma lista de arquivos com seus detalhes
+muda o runlevel 
 
-	ls -l	
+	telinit 1
 
-Mostra uma lista de arquivos com seus detalhes com o tamanho do arquivo em kbytes
+muda o runlevel para 6, reinicia a máquina
 
-	ls -lh ~		
- 
-Mostra todos os arquivos que começam com Aula1+ qualquer caractere + 0 
+	init 6	
 
-	ls Aula1*0
+----------------------------------------------------------------------------------------------
 
-Mostra todos os arquivos que começam com Aula + 1, 2 ou tres 
+SYSTEMD
 
-	ls Aula[1,2,3]*
+----------------------------------------------------------------------------------------------
 
-Mostra todos os arquivos que começam com Aula e não tenham 1, 2 ou tres 
+Arquivos de configurações das unidades
 
-	ls Aula[!1,2,3]*	
+	cd /lib/systemd/system && ls -l
 
-Mostra todos os arquivos que começam com Aula + 1, 2, 3, 4 ou 5 (range)
+Arquivos de configurações das unidades, apenas os arquivos que terminam com target
 
-	ls Aula[1-5]*
+	cd /lib/systemd/system && ls -ld *target
 
-Mostra todos os arquivos que começam com Aula e não tenham 1, 2, 3, 4 ou 5 (range)
+Arquivos de configurações das unidades, apenas os arquivos que terminam com service
 
-	ls Aula[!1-5]*
+	cd /lib/systemd/system && ls -ld *service
 
-Mostra todos os arquivos que começam com Aula e tenha 10,20 ou 30
+Mostra o que ele deve executar 
 
-	 ls Aula[1-3][0]
-	 ls Aula{10,20,30}
+	cat cron.service
 
+Contém alguns arquivos de configuração do systemd
 
-Mostra todos os arquivos que começam com A + ula ou ULA e tenha 10,20 ou 30
+	cd /etc/systemd/system && ls -ltr
 
-	ls -l A{ula,ULA}{10,20,30}	
-	
-mostra o que é o arquivo 
+Mostra os init em execução
 
-	file alunos.txt
+	ps axu |grep init
 
-copia os arquivos que começam com alunos para o diretório tmp, a opção -v (verbose) mostra os detalhes do que ocorreu
+Mostra o local onde o init esta sendo apontado 
 
-	cp -v alunos* teste/
+	ls -l /sbin/init
 
-pergunta se você deseja sobrescrever um arquivo
+System manager control commands 
 
-	cp -i alunos* teste/
+	systemctl
 
-comando cp não copia diretórios por padrão, é necessário informar a opção -r para que seja possível copiar o diretório1 para o /t/
+Listas todas as unidades
 
-	cp -r t teste/
+	systemctl list-units
 
-Copia o arquivo preservando as suas características, como o usuário que criou o arquivo a data e hora.
+Reinicializa o sistema 
 
-	cp -p Scripts* /teste
-	
-copia o arquivo pro mesmo diretório
+	systemctl reboot
 
-	cp alunos.txt teste
+Desliga a máquina
 
-Copia o arquivo para o diretório tmp e muda seu nome 
+	systemctl poweroff
 
-	cp alunos.txt teste/alunos1234.txt
+Defini o target default
 
-Move os arquivos 
+	systemctl set-default multi-user.target
 
-	mv alunos.txt teste/
+Muda o nível de execução 
 
-Cria um arquivo em branco 
+	systemctl isolate rescue.target 
 
-	touch	
+Inicia o target default (normalmente o graphical) 
 
-Atualiza o arquivo o horário de um arquivo existente. 
+	systemctl default
 
-	touch arquivo.txt
+Mostra o estado deste serviço
 
-Altera a data do último acesso 
+	systemctl status cron.service
 
-	 touch -a alunos.txt	
+Inicia o Serviço
 
-Altera a data e hora da última modificação
+	systemctl start cron.service
 
-	touch -m arquivolongo.txt
+----------------------------------------------------------------------------------------------
 
-Altera a data e hora que você deseja
+UPSTART
 
-	
+----------------------------------------------------------------------------------------------
 
-Remove arquivo de diretórios 
+Desliga a máquina a um minuto (padrão)
 
-	rm
+	shutdown
 
-Pergunta se você deseja realmente excluir o arquivo
+Cancela o comando 
 
-	rm -i
+	shutdown -c
 
-Mostra os detalhes da remoção
+Reinicia o Sistema
 
-	rm -v t/
+	shutdown -r
 
-Remove o diretório e o que tem dentro dele
+Desliga o Linux, porém não desliga a máquina 
 
-	rm -r t/	
+	shutdown -h 
 
-Usado para remover diretórios vazios
+Agenda o restart para daqui a 10 minutos 
 
-	rmdir t/ 
+	shutdown -r + 10
 
-Remove o diretório e tudo que tem dentro
+Programa o desligamento para as 18:00
 
-	rm -r
+	shutdown 18:00 
 
-Cria um diretório 
+Reinicia a máquina
 
-	mkdir
+	reboot
 
-Cria um diretório Linux, e o diretório dentro dele
+Desliga o Linux, porém não desliga a máquina 
 
-	mkdir -r 
+	halt
 
-Cria toda a estrutura de pastas 
+Desliga a máquina
 
-	mkdir -p t/t	
+	poweroff
 
-usado para procurar arquivos e diretórios
+Manda uma mensagem para todos os usuários do sistema 
 
-	find	
-	
-Este comando irá procurar no /home um arquivo que possua o nome Aula10
+	wall "Vamos tomar um café?"
 
-	find /home -name Aula10
 
-Este comando vai procurar a partir do diretório atual (./), qualquer arquivo que tenha sido alterado no máximo um dia antes
+101.3 Alterar os RunLevels, Shutdown e Reboot
 
-	find / -ctime -1
+6. Identifique se a sua instalação Linux está utilizando SysV, systemd ou upstart.
 
-criar um arquivo com vários arquivos agrupados, c de criar,  p preserva as opções, v ver os detalhes, f pra mostrar o nome do arquivo
-	
-	tar -cpvf backup.tar * 
+7. Identifique o runlevel ou target padrão em seu sistema de inicialização SysV ou systemd.
 
-Mostra os arquivos que estão dentro do arquivo agrupado
+8. Em um sistema systemd, identifique a quantidade de targets existentes.
 
-	tar -tf backup.tar
+9. Em um sistema com systemd, verifique se o serviço cron está sendo iniciado por padrão no target default. Se não estiver, faça com que seja, se estiver, desabilite.
 
-Compacta arquivo
-
-	gzip backup.tar	
-
-descompacta arquivo
-	
-	unzip backup.tar.gz	
-
-descompacta arquivo
-
-	gunzip backup.tar.gz	
-
-descompacta arquivo
-
-	gzip -d backup.tar.gz 
-
-Mantendo o arquivo de origem 
-
-	gzip -k backup.tar
-
-Mantendo o arquivo de origem 
-
-	bzip2 -k backup.tar
-
-descompacta arquivo
-
-	bzip2 -d backup.tar	
-
-descompacta arquivo
-
-	bunzip2 -d backup.tar.bz2
-
-Mantendo o arquivo de origem 
-
-	bunzip2 -k backup.tar.bz2
-
-descompacta arquivo
-
-	xz -k backup.tar
-
-descompacta arquivo
-
-	unxz backup.tar.xz 
-
-agrupa e compacta 
-
-	tar cpvf backup2.tar * 
-
-agrupa e compacta com o gzip
-
-	tar zcpvf backup2.tgz *
-	
-agrupa e compacta com o bzip2
-
-	tar jcpvf backup.tbz *
-
-agrupa e compacta com o xz
-
-	tar Jcpvf backup.txz *
-	
-Mostra como foi feito o backup dos arquivos 
-
-	file backup*
-
-se o .tgz foi compactado com o z no final, então use o z para descompactar, x para extrair  , 
-v para os detalhes (verbose), f para indicar o nome do arquivo  
-
-	tar zxvf backup2.tgz
-
-se o .txz foi compactado com o xz, então use o J para descompactar, x para extrair  , v para os detalhes (verbose), f para indicar o nome do arquivo  (sempre a última opção do arquivo)
-
-	tar Jxvf backup.txz 
-
-criar um arquivo com vários arquivos agrupados, porém precisa de uma lista de entrada 
-
-	cpio 
-
-Procura no diretŕio atual por nome todos os arquivos que comecem com novo
-
-	find ./ -name "novo*"
-
-Cria uma lista de arquivo e passa isso como entrada para o cpio 
-
-	find ./ -name "novo*" |cpio -o > backup.cpio
-
-Cria uma lista de arquivo e passa isso como entrada para o cpio (-o cria o arquivo)  que agrupa, e é compactado pelo gzip
-
-	find ./ -name "novo*" |cpio -o |gzip > backup.cpio.gz
-
-desagrupar backup.cpio 
-
-	cpio -i < backup.cpio
-
-descompacta backup.cpio
-
-	gunzip -c backup.cpio.gz | cpio -i
- 
-Usado para compactar um partição inteira
-
-	dd
- 
-Cria um arquivo de imagem
-
-	sudo dd if=/dev/sdb4 of=imagem.img
-
-
-
-6. No home de seu usuário, crie um diretório chamado LPI1, dentro dele crie Aulas, Exercicios e Exemplos.
-
-	cd ~/teste ; mkdir -p LPI1/Aulas ;mkdir -p LPI1/Exercicios ;mkdir -p LPI1/Exemplos  
-
-
-7. Copie (não mova) todos os arquivos e diretórios existentes em /etc/network/ para <HOME>/LPI1/Exercicios/Network/. Mantenha as mesmas permissões.
-
-	cp -p /etc/network/* ~/teste/LPI1/Exercicios/Network/
-
-8. Copie (não mova) todos os arquivos do diretório /etc, cujo norme termine com ".conf" para <HOME>/LPI1/Exercicios/Config/ 
-
-	cp /etc/*.conf /home/lpi1/teste/LPI1/Exercicios/Config
-		
-
-9. Em <HOME>/LPI1/Exercicios, crie um arquivo chamado arquivos-cron.tgz, compactado com o gzip, contendo todos os arquivos e diretórios do /etc que contenham a palavra "cron" no nome.
-
-	tar zcpvf arquivo-cron.tgz /etc/*cron*
-
-10. Descompacte conteúdo do arquivo arquivos-cron.tgz dentro do diretório <HOME>/LPI1/Exercicios/Descompactar/
-
-	cd ~/LPI1/Exercicios/Descompactar/; tar zxvf ../arquivo-cron.tgz
-	
-
-11. Encontre todos os arquivos do diretório /var, cujo nome termine com ".gz" e que foram modificados nas últimas 48 horas.
-
-	find /var -name "*.gz" -atime -2
-
-
-
-
-
+10. Informe pelo menos 3 comandos diferentes para reiniciar uma máquina Linux.

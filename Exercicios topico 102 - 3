@@ -1,133 +1,76 @@
-----------------------------------------------------------------------------------------------
+Estática = referência uma biblioteca externa, e essa biblioteca é incorporada a aplicação.
+Dinâmica = índico na aplicação a biblioteca que será utilizada, e a biblioteca será carregada apenas uma vez. 
 
-SystemV (SysV) - RUNLEVELS
 
-----------------------------------------------------------------------------------------------
+ldd Mostra quais bibliotecas são utilizadas por determinada aplicação.
 
-Arquivo de configuração inittab
+	 whereis vim
+ 	 ldd /usr/bin/vim
 
-	/etc/inittab |less
+Mostra quais bibliotecas são utilizadas por determinada aplicação, com mais detalhes.
 
-Vários arquivos referentes aos serviços
-	
-	cd /etc/init.d && ls
+	ldd -v /usr/bin/vi 
 
-Irá mostrar o status do serviço de agendamento de tarefas no linux
+Programa que vincula as bibliotecas 
 
-	./cron status
+	 ls -ld /etc/ld.so*
 
-Mostra os runlevels 
+o diretório padrão onde se encontra as bibliotecas utilizadas pelas aplicações
 
-	cd /etc && ls -ld rc*
+	cd /lib
 
-Usado para mostrar o runlevel que você está usando 
+o diretório padrão onde se encontra as bibliotecas utilizadas pelas aplicações
 
-	runlevel
+	cd /usr/lib	
 
-Muda o runlevel
+Ficam mapeadas todas as bibliotecas. 
 
-	init 1
+	cat /etc/ld.so.cache
 
-muda o runlevel 
+Principal arquivo de configuração, neste arquivo que eu vou indicar os caminhos onde o linux vai encontrar as bibliotecas
 
-	telinit 1
+	vi /etc/ld.so.conf
 
-muda o runlevel para 6, reinicia a máquina
+É usado para recompilar o arquivo ld.so.cache
 
-	init 6	
+	ldconfig
 
-----------------------------------------------------------------------------------------------
+Lista todas as bibliotecas ativas no momento 
 
-SYSTEMD
+	 ldconfig -p
 
-----------------------------------------------------------------------------------------------
+Adiciona uma biblioteca 
 
-Arquivos de configurações das unidades
+	vi /etc/ld.so.conf e inserir a biblioteca /tmp/lib
+	ldconfig //para atualizar
+	ldconfig -p |grep "tmp/lib" para verificar se diretório foi inserido
 
-	cd /lib/systemd/system && ls -l
+Atualiza o ld.so.cache
 
-Arquivos de configurações das unidades, apenas os arquivos que terminam com target
+	ldconfig
 
-	cd /lib/systemd/system && ls -ld *target
+Vê se a biblioteca foi inserida
 
-Arquivos de configurações das unidades, apenas os arquivos que terminam com service
+	ldconfig -p |grep "tmp/lib" para verificar se diretório foi inserido
 
-	cd /lib/systemd/system && ls -ld *service
+Opção caso o usuário não seja root, inclui bibliotecas que podem ser utilizadas temporariamente na sessão do usuário. 
 
-Mostra o que ele deve executar 
+export LD_LIBRARY_PATH=/tmp/lib
 
-	cat cron.service
 
-Contém alguns arquivos de configuração do systemd
+7. Em sua instalação, quantas bibliotecas estão mapeadas no /etc/ld.so.cache?
 
-	cd /etc/systemd/system && ls -ltr
+	ldconfig -p |less
 
-Mostra os init em execução
+8. Crie o diretório /home/<seuusuario>/libs/, em seguida copie algumas das bibliotecas existentes no /lib/ para esse diretório, e inclua esse diretório na base do ld.so.
 
-	ps axu |grep init
+	mkdir /home/lpi1/libs 
+	vi /etc/ld.so.conf
 
-Mostra o local onde o init esta sendo apontado 
-
-	ls -l /sbin/init
-
-System manager control commands 
-
-	systemctl
-
-Listas todas as unidades
-
-	systemctl list-units
-
-Reinicializa o sistema 
-
-	systemctl reboot
-
-Desliga a máquina
-
-	systemctl poweroff
-
-Defini o target default
-
-	systemctl set-default multi-user.target
-
-Muda o nível de execução 
-
-	systemctl isolate rescue.target 
-
-Inicia o target default (normalmente o graphical) 
-
-	systemctl default
-
-Mostra o estado deste serviço
-
-	systemctl status cron.service
-
-Inicia o Serviço
-
-	systemctl start cron.service
-
-Desliga a máquina a um minuto (padrão)
-Cancela o comando 
-Reinicia o Sistema
-Desliga o Linux, porém não desliga a máquina 
-Agenda o restart para daqui a 10 minutos 
-Programa o desligamento para as 18:00
-Reinicia a máquina
-Desliga o Linux, porém não desliga a máquina 
-Desliga a máquina
-Manda uma mensagem para todos os usuários do sistema 
+9. Quantas bibliotecas externas são utilizadas pelo programa "top"
+	whereis top
+	ldd /usr/bin/top |wc -l
 
 
 
 
-101.3 Alterar os RunLevels, Shutdown e Reboot
-
-6. Identifique se a sua instalação Linux está utilizando SysV, systemd ou upstart.
-
-7. Identifique o runlevel ou target padrão em seu sistema de inicialização SysV ou systemd.
-
-8. Em um sistema systemd, identifique a quantidade de targets existentes.
-
-9. Em um sistema com systemd, verifique se o serviço cron está sendo iniciado por padrão no target default. Se não estiver, faça com que seja, se estiver, desabilite.
-
-10. Informe pelo menos 3 comandos diferentes para reiniciar uma máquina Linux.

@@ -1,0 +1,207 @@
+-----------------------------------------------------------------------------------------------------
+Conceitos importantes 
+
+Cada sistema deve usar um sistema de gerenciamento único.
+Um pacote é um conjunto de arquivos relacionados a uma aplicação: executaveis, cfgs, 
+bibliotecas, manuais, etc, além de informações sobre dependências.
+Os gerenciadores de pacotes mantém uma base de dados relacionando todos os pacotes, 
+seus arquivos e dependências. 
+-----------------------------------------------------------------------------------------------------
+
+Ver os pacotes que estão instalados 
+
+	dpkg -l
+
+Mostra as informações do pacote Bash
+
+	dpkg -l bash
+
+Mostra todos os pacotes instalados 
+
+	dpkg --get-selections |less
+
+Mostra informações sobre o pacote
+
+	dpkg -I ksh_93u-1_amd64.deb
+
+Mostra a lista de arquivos que tem dentro do pacote
+
+	dpkg --contents ksh_93u-1_amd64.deb
+
+instala o programa
+
+	dpkg -i ksh_93u-1_amd64.deb
+
+Lista o nome dos arquivos associados a esse programa 
+
+	dpkg -L ksh 
+
+Mostra o status do pacote 
+	
+	dpkg -s ksh
+
+Mostra a origem do programa
+
+	dpkg -S ksh
+
+Remover o pacote, mas mantém os arquivos de configuração e a referência do pacote na base de dados
+
+	dpkg -r ksh
+
+Mostra se o arquivo está desinstalado 
+
+	dpkg --get-selections |grep ksh
+
+Remove o programa e os arquivos de configuração
+
+	dpkg --purge ksh
+
+-----------------------------------------------------------------------------------------------------
+
+Comando apt - repository com várias urls, onde se consulta a base de dados 
+e realiza o download e a instalação do programa
+
+-----------------------------------------------------------------------------------------------------
+
+Mostra as informações da base de dados dos pacotes debian 
+
+	apt-cache
+
+Mostra informações de um pacote específico
+
+	apt-cache show vim
+
+Mostra as dependências do pacote que ele precisa pra funcionar 
+
+	apt-cache depends vim
+
+faz o download e instalação dos programas
+
+	apt-get install ksh
+
+Contém todas as fontes das origens dos arquivos 
+
+	vim /etc/apt/sources.list
+
+Obtém informações atualizadas das fontes
+
+	apt-get update 
+
+Realiza a atualização de todos os pacotes
+
+	apt-get upgrade 
+
+Realiza a atualização de todos os pacotes, desde que não haja quebra de dependências
+
+	apt-get dist-upgrade
+
+Instala os programas 
+
+	apt-get install ksh
+
+Remover o pacote, mas mantém os arquivos de configuração e a referência do pacote na base de dados
+
+	apt-get remove ksh
+
+Remove o programa e os arquivos de configuração
+
+	apt-get purge ksh
+
+Checa as bases de dados do gerenciador de pacotes 
+
+	apt-get check
+
+Faz uma limpeza na base de dados 
+
+	apt-get clean
+
+
+Faz o download dos pacotes, para ser instalado depois 
+
+	apt-get --download-only install zs
+
+Reconfigura um pacote instalado 
+
+	dpkg-reconfigure 
+
+Reconfigura o timezone
+
+	dpkg-reconfigure tzdata
+
+Reconfigura o teclado
+
+	dpkg-reconfigure keyboard-configuration
+
+como uma interface gráfica do apt
+
+	dselect
+
+como uma interface gráfica do apt
+
+	aptitude
+
+igual ao apt-get update
+
+	aptitude update
+
+igual ao apt-get upgrade
+
+	aptitude safe-upgrade 
+
+procura se o pacote está instalado 
+
+	apititude search csh
+
+igual ao apt-get remove
+
+	apititude remove
+
+igual ao apt-get purge
+
+	apititude purge
+
+converte arquivos rmp. em .deb
+
+	alien
+
+Transforma em um pacote RPM
+
+	alien -r arq.deb
+
+Instala um arquivo RPM em um sistema que utiliza .deb 
+
+	alien -i arq.rpm
+
+Transforma em um arquivo RPM
+
+	alien arq.deb
+
+
+
+10. Faça o download do .deb do shell "ksh"
+
+	apt-get --download-only install ksh
+	*verificar no diretório /var/cache/apt/archives/
+
+11. Instale o ksh usando o "dpkg"
+
+	dpkg -i binfmt-support_2.1.6-1_amd64.deb
+
+12. Utilizando o apt-get, instale o mysql-client
+
+	apt-get install mysql-client
+
+13. Utilizando o apt-get, remova completamente a aplicação ksh
+
+	apt-get purge ksh
+
+14. Quantos "pacotes" há instalados em seu Linux?
+
+	dpkg -l |wc -l
+
+15. Quais as dependências da aplicação "bash" ?
+
+	apt-cache depends bash
+
+
+

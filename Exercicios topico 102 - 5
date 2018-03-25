@@ -1,0 +1,156 @@
+
+Mostra todos os pacotes instalados na máquina
+
+	rpm -qa
+
+Mostra todos os pacotes instalados na máquina, que possuem bash no nome
+
+	rpm -qa bash
+
+Mostra as todas as informações desta instalação
+
+	rpm -qi bash
+
+Mostra todos os arquivos que pertencem a essa aplicação
+
+	rpm -ql bash
+
+Todos os arquivos de documentação 
+
+	rpm -qd bash
+
+O pacote que instalou esse arquivo
+
+	rpm -qf /etc/skel/ .bashrc
+
+Lista os arquivos dentro desse pacote
+
+	rrpm -qlp ksd.rpm
+
+Lista informações deste pacote
+
+	rpm -qip ksd.rpm
+
+instala um pacote 
+
+	rpm -i ksd.rpm
+
+Atualiza a versão do programa q vc tem, se não tiver instala
+
+	rpm -U ksd.rpm
+
+Instala os pacotes mostrando tudo o q esta sendo instalado e com a porcentagem de completo de cada etapa.
+
+	rpm -ivh ksd.rpm
+
+Instala o programa ignorando as dependências, pode ser que ocorra um erro no programa devido a falta destas dependências.
+
+	rpm -ivh --nodeps_gcc.rpm 
+
+Permite a substituição de arquivos existentes. 
+
+	rpm --force --nodeps_gcc.rpm 
+
+Não instala efetivamente, apenas testa a instalação
+
+	rpm --test --nodeps_gcc.rpm 
+
+Remove o ksh
+
+	rpm -e ksh
+
+Remove o ksh, com uma saída do q está sendo desinstalado 
+
+	rpm -evh ksh
+
+Desinstala ignorando as dependências 
+
+	rpm -evh --nodeps_gcc.rpm 
+
+Verifica a aplicação, se houver erro é printado na tela, caso contrário não 
+
+	rpm -V bash
+
+
+Instala um ou mais pacotes
+
+	yum install gcc
+
+Atualiza um ou todos os pacotes
+
+	yum update	
+
+Atualiza um ou todos os pacotes, inclusive removendo ou substituindo pacotes obsoletos
+
+	yum upgrade
+
+Remove os programas obsoletos 
+
+	yum upgrade --obsolete
+
+Atualiza pacote específico 
+
+	yum update bash 
+
+Verifica as atualizações de pacotes disponíveis
+
+	yum check-update
+
+Lista os pacotes instalados ou disponíveis
+
+	yum list
+
+Procura por um pacote baseado em uma palavra/string
+
+	yum search samba
+
+Faz a instalação do arquivo com suas dependências 
+
+	yum install --downloadonly samba	
+
+Faz a instalação do arquivo com suas dependências
+
+	yumdownloader csh 
+
+instala o yumdownloader e outros pacotes 
+
+	yum install yum-utils 
+
+Mostra o que esta tudo ok com a aplicação
+
+	rpm -V bash
+
+Checa a integridade do pacote
+
+	rpm --checksing pacote.rpm 
+
+converte o conteúdo em um archive cpio e depois filtrá-lo através do comando cpio para extrair arquivos individuais ou todos os arquivos do pacote
+
+	rpm2cpio arquivo.rpm > tsch.cpio
+
+
+16. Faça o download do pacote rpm do editor de textos "nano"
+
+	yumdownloader nano
+	yum install –downloadonly –downloaddir=/tmp nano
+
+17. Utilizando o comando rpm, instale o "nano"
+
+	rpm -ivh nanoXXXXXXX.rpm	
+
+18. Consulte a versão do nano que foi instalada
+
+	rpm -qi nano
+
+19. Utilizando o yum, remova o pacote nano
+
+	yum erase nano
+
+20. Utilizando o yum, faça o upgrade de todos os pacotes de sua distribuição RedHat-based, sem remover pacotes obsoletos.
+
+	yum update
+
+21. Encontre a aplicação relacionada ao arquivo /etc/sudoers
+
+	rpm -qf /etc/sudoers
+

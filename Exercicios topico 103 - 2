@@ -1,0 +1,166 @@
+
+Retira as linhas duplicadas que estejam sem espaço 
+
+	uniq alunos2.txt 
+
+Ordena as linhas dos arquivo e retira as linhas duplicadas
+
+	sort alunos2.txt |uniq 			
+
+Ordena as linhas do arquivo e mostra as linhas duplicadas
+
+	sort alunos2.txt |uniq -d		
+
+Ordena as linhas do arquivo e retira as linhas duplicadas e mostra quantas vezes ela se repete
+
+	sort alunos2.txt |uniq -dc
+
+conta o número de linhas que tem no arquivo
+
+	wc -l alunos.txt 		
+
+convert tabs to spaces
+
+	expand alunos.txt
+
+ -a a opção considera todos os espaços vazios para transformar espaços em tab
+
+	unexpand -a alunos.txt 	
+
+--------------------------------------------------------------------------------------------------------------------
+
+ao invés de 8 espaços 5 espaços serão considerados TABS 
+
+	unexpand -a -t5 alunos.txt
+
+
+Exibe o conteúdo de um texto em formato octal 
+
+	od alunos.txt 
+
+Combina dois arquivos através de um índice (quando esta em sequência)
+
+	join codigo-aluno.txt notas-aluno.txt 
+
+muda o índice, por exemplo se tiver duas colunas com números será considerada a segunda como o índice
+
+	join -j2 codigo-aluno.txt notas-aluno.txt	
+
+comando semelhante ao join, porém não utiliza índice e combina linha a linha, primeira linha de um arquivo com a primeira linha de outro arquivo. 
+	
+	paste codigo-aluno.txt notas-aluno.txt
+
+divide um arquivo em vários outros.
+
+	split arquivolongo.txt teste/		
+
+divide um arquivo existente em vários arquivos de 20 linhas, a partir de um arquivo existente (se for -l20 em um arquivo de 100 linhas, o resultado será de 5 arquivos de 20 linhas. 
+
+	split -l20 arquivolongo.txt teste/
+
+divide um arquivo existente em vários arquivos de 20 linhas seguindo novo_arquivo_ como padrão de nome alterando o final
+
+	split -l20 arquivolongo.txt teste/novo_arquivo
+
+
+divide um arquivo existente em vários arquivos de 100 bytes seguindo novo_arquivo_ como padrão de nome alterando o final
+
+	 split -b100 arquivolongo.txt teste/novo_arquivo
+
+Serve para pegar um conteúdo de texto e substituir ou deletar algum caracter  
+Pega todas as letras minúsculas do arquivo alunos.txt e as transforma em letras maiúsculas 
+
+	cat alunos.txt |tr [a-z] [A-Z]
+
+Transforma tudo que é A maiúsculo E minúsculo 
+
+	cat alunos.txt |tr A e
+
+Transforma todos os caracteres ‘e’ e ‘i’ minusculos em maiúsculos independentes de estarem juntos 
+
+	cat alunos.txt |tr [e,i] [E,I] 
+		
+Transforma tudo que é maiúsculo para minúsculo 
+
+	cat alunos.txt |tr [:upper:] [:lower:]
+	
+Transforma todos os espaços vazios em underlines 
+	
+	cat alunos.txt |tr ' ' '_'	
+
+Exclui todas as letras A maiúsculas 
+
+	  cat alunos.txt |tr A ' '
+
+Deleta tudo que está em letra maiúscula 
+
+	cat alunos.txt |tr -d [:upper:]
+	
+Deleta todo espaço em branco
+
+	 cat alunos.txt |tr -d ' '	
+
+formata uma saída de texto 
+reduz a quantidade de caracteres por linha 
+
+	fmt arquivolongo.txt
+		
+cada linha com 100 caracteres no máximo
+
+	fmt -w100 arquivolongo.txt	
+
+Prepara um arquivo para impressão
+
+	pr arquivolongo.txt 
+
+Defini quantas linhas terá cada página 
+
+	 pr -l10 arquivolongo.txt 
+
+Inclui um cabeçario 
+
+	 pr -h "CURSO LPI" arquivolongo.txt 	
+
+Recorta partes de um texto
+Recorta os 5 primeiros caracteres 
+
+	cut -c1-5 alunos.txt 
+
+
+Recorta os caracteres específicos 
+
+	cut -c1,2,3 alunos.txt	
+
+Recorta os 5 primeiros caracteres 
+
+	cut -c-5 alunos.txt 
+
+Recorta o caractere 5 pra frente
+	
+	cut -c5- alunos.txt
+	
+Recorta os 5 primeiros caracteres 
+
+	cut -c-5 alunos.txt
+
+extraindo apenas o campo 1 do arquivo
+
+	cut -d" " -f1 alunos.txt	
+	
+Usado com expressões regulares, usado para procurar um conteúdo e substituir 
+toda vez que ele encontrar a palavra silva ele trocara por sousa (só substitui a primeira ocorrência de cada linha)  
+
+	sed "s/silva/sousa/" alunos.txt 	
+
+toda vez que ele encontrar a palavra silva ele trocara por sousa (substitui tudo)
+
+	sed "s/silva/sousa/g" alunos.txt	
+
+deletar uma linha, este comando vai apagar da linha 3 a linha 5
+
+	sed "3,5 d" alunos.txt
+
+Toda vez que encontrar o nome Claudia ele ira apagar da saída 
+
+	sed "/claudia/d" alunos.txt
+

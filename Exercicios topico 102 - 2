@@ -1,7 +1,73 @@
-Ver as informações do BOOT, além de informações dinâmicas 
 
-101.2 O Processo de Boot
+Contém as imagens do kernel, tem initrd (a imagem init run fs) 
 
-5. Identifique através do comando dmesg o nome do arquivo kernel carregado durante o boot.
+	ls -l /boot/
 
-dmesg |grep BOOT_IMAGE
+Arquivos de configuração do grub (grub.cfg principal arquivo de configuração) 
+
+	ls -l /boot/grub
+	cat /boot/grub/grub.cfg 
+
+Mostra a versão do grub
+
+	update-grub --version
+
+Instala o grub na MBR
+
+	update-grub
+
+edita o arquivo de configuração do grub
+
+	vi /etc/default/grub
+
+Scripts que são usados para montar o grub.cfg 
+
+	ls /etc/grub.d/
+
+Ver as configurações de timeout do arquivo grub.cfg 
+
+	cat /etc/default/grub |grep TIMEOUT
+
+depois que alguma alteração é feita no arquivo /etc/default/grub, o comando atualiza as informações no grub.cfg 
+
+	grub-mkconfig -o /boot/grub/grub.cfg 
+
+depois que alguma alteração é feita no arquivo /etc/default/grub, o comando atualiza as informações no grub.cfg 
+
+	update-grub
+
+Faz a cópia de uma partição inteira, para que deste modo tenhamos o backup do MBR, if(caminho do que se deseja copiar), of(nome do arquivo que vai ser gerado) , bs=1(Parâmetro que indica que será copiado byte por byte) e count(que irá copiar os primeiros 512 bytes do arquivo) 
+
+	dd if=/dev/sda of=copia.mbr bs=1 count=512
+
+
+4. Qual o gerenciador de boot utilizado em sua instalação? Sendo GRUB, qual a versão?
+
+	update-grub --version
+	grub-install --version
+
+5. Qual a versão do kernel que está sendo carregada por padrão em seu bootloader?
+
+	uname -r
+	
+	cat /boot/grub/grub.cfg |grep linux
+
+	Através da tela do bootloader, você pode abrir os detalhes de configuração do load
+	padrão e procurar pela linha “kernel” ou “linux", que vai indicar o nome do arquivo
+	vmlinux*.
+
+6. Altere os seguintes parâmetros nas configurações de seu boot loader 
+(faça um arquivo de backup antes de alterar)?
+
+
+	dd if=/dev/sda1 of=cobia.boot bs=1 count=512
+
+Mude o tempo de timeout para 15 segundos
+
+	vi /etc/default/grub 	
+
+Inclua no título da distribuição padrão a descrição " - Curso LPI 1"
+
+Para alterar o nome, você pode editar diretamente o arquivo /boot/grub/grub.cfg, na
+entrada “menuentry”.
+
